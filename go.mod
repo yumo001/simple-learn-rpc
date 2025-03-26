@@ -1,4 +1,4 @@
-module github.com/yumo001/example
+module github.com/yumo001/simple-learn-rpc
 
 go 1.23.6
 
