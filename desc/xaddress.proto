@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+// XAddress message
+
+message XAddressInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional int64 user_id = 4;
+  optional int64 default = 5;
+  optional string first_name = 6;
+  optional string last_name = 7;
+  optional int64 country_id = 8;
+  optional string street = 9;
+  optional string province = 10;
+  optional string city = 11;
+  optional string postal_code = 12;
+  optional string phone = 13;
+}
+
+message XAddressListResp {
+  uint64 total = 1;
+  repeated XAddressInfo data = 2;
+}
+
+message XAddressListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional int64 created_at = 3;
+  optional int64 updated_at = 4;
+  optional int64 user_id = 5;
+  optional int64 default = 6;
+  optional string first_name = 7;
+  optional string last_name = 8;
+  optional int64 country_id = 9;
+  optional string street = 10;
+  optional string province = 11;
+  optional string city = 12;
+  optional string postal_code = 13;
+  optional string phone = 14;
+}
+
+
+service Example {
+
+  // XAddress management
+  // group: XAddress
+  rpc createXAddress (XAddressInfo) returns (BaseIDResp);
+  // group: XAddress
+  rpc updateXAddress (XAddressInfo) returns (BaseResp);
+  // group: XAddress
+  rpc getXAddressList (XAddressListReq) returns (XAddressListResp);
+  // group: XAddress
+  rpc getXAddressById (IDReq) returns (XAddressInfo);
+  // group: XAddress
+  rpc deleteXAddress (IDsReq) returns (BaseResp);
+
+
+}

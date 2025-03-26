@@ -1,0 +1,149 @@
+syntax = "proto3";
+
+package example;
+option go_package = "./example";
+
+message BaseIDInt32Resp {
+  int32 id = 1;
+  string msg = 2;
+}
+
+message BaseIDInt64Resp {
+  int64 id = 1;
+  string msg = 2;
+}
+
+message BaseIDResp {
+  uint64 id = 1;
+  string msg = 2;
+}
+
+message BaseIDStringResp {
+  string id = 1;
+  string msg = 2;
+}
+
+message BaseIDUint32Resp {
+  uint32 id = 1;
+  string msg = 2;
+}
+
+message BaseResp {
+  string msg = 1;
+}
+
+message BaseUUIDResp {
+  string id = 1;
+  string msg = 2;
+}
+
+//  base message
+message Empty {}
+
+message IDInt32Req {
+  int32 id = 1;
+}
+
+message IDInt64Req {
+  int64 id = 1;
+}
+
+message IDReq {
+  uint64 id = 1;
+}
+
+message IDStringReq {
+  string id = 1;
+}
+
+message IDUint32Req {
+  uint32 id = 1;
+}
+
+message IDsInt32Req {
+  repeated int32 ids = 1;
+}
+
+message IDsInt64Req {
+  repeated int64 ids = 1;
+}
+
+message IDsReq {
+  repeated uint64 ids = 1;
+}
+
+message IDsStringReq {
+  repeated string ids = 1;
+}
+
+message IDsUint32Req {
+  repeated uint32 ids = 1;
+}
+
+message PageInfoReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+}
+
+message UUIDReq {
+  string id = 1;
+}
+
+message UUIDsReq {
+  repeated string ids = 1;
+}
+
+message XAddressInfo {
+  optional uint64 id = 1;
+  optional int64 created_at = 2;
+  optional int64 updated_at = 3;
+  optional int64 user_id = 4;
+  optional int64 default = 5;
+  optional string first_name = 6;
+  optional string last_name = 7;
+  optional int64 country_id = 8;
+  optional string street = 9;
+  optional string province = 10;
+  optional string city = 11;
+  optional string postal_code = 12;
+  optional string phone = 13;
+}
+
+message XAddressListReq {
+  uint64 page = 1;
+  uint64 page_size = 2;
+  optional int64 created_at = 3;
+  optional int64 updated_at = 4;
+  optional int64 user_id = 5;
+  optional int64 default = 6;
+  optional string first_name = 7;
+  optional string last_name = 8;
+  optional int64 country_id = 9;
+  optional string street = 10;
+  optional string province = 11;
+  optional string city = 12;
+  optional string postal_code = 13;
+  optional string phone = 14;
+}
+
+message XAddressListResp {
+  uint64 total = 1;
+  repeated XAddressInfo data = 2;
+}
+
+service Example {
+  //  group: base
+  rpc initDatabase(Empty) returns (BaseResp);
+  //  XAddress management
+  //  group: XAddress
+  rpc createXAddress(XAddressInfo) returns (BaseIDResp);
+  //  group: XAddress
+  rpc updateXAddress(XAddressInfo) returns (BaseResp);
+  //  group: XAddress
+  rpc getXAddressList(XAddressListReq) returns (XAddressListResp);
+  //  group: XAddress
+  rpc getXAddressById(IDReq) returns (XAddressInfo);
+  //  group: XAddress
+  rpc deleteXAddress(IDsReq) returns (BaseResp);
+}
+

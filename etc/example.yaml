@@ -1,0 +1,34 @@
+Name: example.rpc
+ListenOn: 0.0.0.0:8081
+
+DatabaseConf:
+  Type: mysql
+  Host: 127.0.0.1
+  Port: 3306
+  DBName: yumo-simple-learn
+  Username: root # set your username
+  Password: "123456" # set your password
+  MaxOpenConn: 100
+  SSLMode: disable
+  CacheTime: 5
+
+RedisConf:
+  Host: 127.0.0.1:6379
+  Db: 0
+  Pass: "123456"
+  Username:
+
+Log:
+  ServiceName: exampleRpcLogger
+  Mode: file
+  Path: /home/data/logs/example/rpc
+  Encoding: json
+  Level: info
+  Compress: false
+  KeepDays: 7
+  StackCoolDownMillis: 100
+
+Etcd:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: example.rpc
